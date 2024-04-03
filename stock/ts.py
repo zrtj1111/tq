@@ -4,12 +4,8 @@
 # @Comment :
 import datetime
 import os.path
-
 import pandas as pd
-from ds import akshare_wrapper as aw
-import config
 import util
-from mootdx.utils.adjust import fq_factor
 
 
 def get_bars(code, freq='d', start_date=None, end_date=None, adjust=None, source='tdx'):
@@ -22,7 +18,7 @@ def get_bars(code, freq='d', start_date=None, end_date=None, adjust=None, source
         if adjust not in ['qfq', 'hfq']:
             raise Exception('Error adjust, must be <qfq|hfq>')
 
-        xdxr_file = os.path.join(util.get_working_dir(type='xdxr'), '%s.ftr' % code)
+        xdxr_file = os.path.join(util.get_working_dir(type='xdxr'), '%s.%s.ftr' % (code, source))
 
         df_xdxr = pd.read_feather(xdxr_file)
         df = pd.merge(df, df_xdxr, on='datetime', how='left')

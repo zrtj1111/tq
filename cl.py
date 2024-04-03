@@ -2,7 +2,7 @@
 import sqlite3
 import webbrowser
 import pandas as pd
-from ds import akshare_wrapper as aw
+# from ds import akshare_wrapper as aw
 import matplotlib.pyplot as plt
 from pyecharts import options as opts
 from pyecharts.charts import Kline
@@ -367,7 +367,9 @@ def update(freq='D', retries=10):
 
 if __name__ == '__main__':
     # update()
-    df = aw.get_bars('688167', start_date='2023-01-01', end_date='2023-11-31', adjust='qfq')
+    import stock.ts as ts
+
+    df = ts.get_bars('688167', start_date='2023-01-01', end_date='2023-11-31', adjust='qfq')
     # cbars = trend_classify(df)
     plot(df)
     # print(cbars)
